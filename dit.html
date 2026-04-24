@@ -124,11 +124,10 @@
               <a href="index.html" class="nav-item nav-link">Inicio</a>
               <!--Seguimiento-->
               <a href="salud_sexual.html" class="nav-item nav-link"
-                >Salud Sexual</a
+                >ESARE</a
               >
-              <a href="salud_mental.html" class="nav-item nav-link"
-                >Salud Mental</a
-              >
+              
+              <!--<a href="salud_mental.html" class="nav-item nav-link">Salud Mental</a>-->
               <a href="dit.html" class="nav-item nav-link active">DIT</a>
               <a href="nosotros.html" class="nav-item nav-link">Nosotros</a>
 
@@ -151,6 +150,9 @@
               -->
 
               <a href="contact.html" class="nav-item nav-link">Contacto</a>
+              <a href="#" id="nav-registros" class="nav-item nav-link d-none" onclick="verRegistros(); return false;">
+                <i class="fas fa-history me-1"></i>Registros
+              </a>
             </div>
           </div>
           <div class="d-none d-xl-flex flex-shrink-0 ps-4">
@@ -162,6 +164,19 @@
       </div>
     </div>
     <!-- Navbar & Hero End -->
+
+    <!-- User Panel -->
+    <div id="user-panel" style="display: none !important; justify-content: center" class="py-2 bg-light">
+      <div class="d-inline-flex align-items-center bg-white rounded-pill px-4 py-2 shadow-sm">
+        <i class="fas fa-user-circle text-primary me-2 fa-lg"></i>
+        <span class="me-3">Bienvenido, <strong id="logged-username"></strong></span>
+        <span class="text-muted small me-3"><i class="fas fa-clock text-primary me-1"></i>Ingreso: <span id="login-time"></span></span>
+        <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="cerrarSesion()">
+          <i class="fas fa-sign-out-alt me-1"></i>Salir
+        </button>
+      </div>
+    </div>
+    <!-- User Panel End -->
 
     <!-- Modal Search Start -->
     <div
@@ -254,13 +269,12 @@
                 monitoreo integral de las atenciones brindadas al paciente,
                 todas ellas dentro del HISMINSA
               </p>
-              <a
+              <button
                 class="btn btn-primary rounded-pill py-2 px-4"
-                target="_blank"
-                href="https://app.powerbi.com/reportEmbed?reportId=0a444847-e4fd-4133-9403-739edb6dc16b&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa"
+                onclick="abrirReporte('https://app.powerbi.com/reportEmbed?reportId=3058eab9-e875-48e7-9a46-ac6fdd521866&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa', 'DIT - Seguimiento de Atenciones')"
               >
                 Ver Detalles <i class="fas fa-arrow-right ms-2"></i>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -299,10 +313,9 @@
                   alt=""
                 />
                 <div class="team-icon">
-                  <a class="btn btn-primary btn-lg rounded-pill mb-2" target="_blank" 
-                    href="https://app.powerbi.com/reportEmbed?reportId=7253578a-06e9-4a5d-87f7-0e2075e25d48&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa">
+                  <button class="btn btn-primary btn-lg rounded-pill mb-2" onclick="abrirReporte('https://app.powerbi.com/reportEmbed?reportId=7253578a-06e9-4a5d-87f7-0e2075e25d48&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa', 'DIT - FED SI-02.01')">
                     <i class="fas fa-eye"></i>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div class="team-title p-4">
@@ -327,10 +340,9 @@
                   alt=""
                 />
                 <div class="team-icon">
-                  <a class="btn btn-primary btn-lg rounded-pill mb-2" target="_blank" 
-href="https://app.powerbi.com/reportEmbed?reportId=3d893e1b-b456-490d-8c3b-6deef9d1e9e1&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa">
+                  <button class="btn btn-primary btn-lg rounded-pill mb-2" onclick="abrirReporte('https://app.powerbi.com/reportEmbed?reportId=3d893e1b-b456-490d-8c3b-6deef9d1e9e1&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa', 'DIT - FED SI-02.02')">
                     <i class="fas fa-eye"></i>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div class="team-title p-4">
@@ -355,10 +367,9 @@ href="https://app.powerbi.com/reportEmbed?reportId=3d893e1b-b456-490d-8c3b-6deef
                   alt=""
                 />
                 <div class="team-icon">
-                  <a class="btn btn-primary btn-lg rounded-pill mb-2" target="_blank" 
-href="https://app.powerbi.com/reportEmbed?reportId=40255327-6656-4bd7-9b1b-6683f20fe351&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa">
+                  <button class="btn btn-primary btn-lg rounded-pill mb-2" onclick="abrirReporte('https://app.powerbi.com/reportEmbed?reportId=40255327-6656-4bd7-9b1b-6683f20fe351&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa', 'DIT - FED SI-02.03')">
                     <i class="fas fa-eye"></i>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div class="team-title p-4">
@@ -383,10 +394,9 @@ href="https://app.powerbi.com/reportEmbed?reportId=40255327-6656-4bd7-9b1b-6683f
                   alt=""
                 />
                 <div class="team-icon">
-                  <a class="btn btn-primary btn-lg rounded-pill mb-2" target="_blank" 
-href="https://app.powerbi.com/reportEmbed?reportId=758eb493-b855-4013-aa58-7364f3857778&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa">
+                  <button class="btn btn-primary btn-lg rounded-pill mb-2" onclick="abrirReporte('https://app.powerbi.com/reportEmbed?reportId=758eb493-b855-4013-aa58-7364f3857778&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa', 'DIT - FED SI-03')">
                     <i class="fas fa-eye"></i>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div class="team-title p-4">
@@ -410,10 +420,9 @@ href="https://app.powerbi.com/reportEmbed?reportId=758eb493-b855-4013-aa58-7364f
                   alt=""
                 />
                 <div class="team-icon">
-                  <a class="btn btn-primary btn-lg rounded-pill mb-2" target="_blank" 
-href="https://app.powerbi.com/reportEmbed?reportId=15222a65-4726-42bd-8860-766fb2f4a839&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa">
+                  <button class="btn btn-primary btn-lg rounded-pill mb-2" onclick="abrirReporte('https://app.powerbi.com/reportEmbed?reportId=0e90113d-dea5-40ac-a9b9-99402e624467&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa', 'DIT - FED MC-02')">
                     <i class="fas fa-eye"></i>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div class="team-title p-4">
@@ -438,10 +447,9 @@ href="https://app.powerbi.com/reportEmbed?reportId=15222a65-4726-42bd-8860-766fb
                   alt=""
                 />
                 <div class="team-icon">
-                  <a class="btn btn-primary btn-lg rounded-pill mb-2" target="_blank" 
-href="https://app.powerbi.com/reportEmbed?reportId=b5b33fbb-ad6d-43f1-be9c-211a1025ad59&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa">
+                  <button class="btn btn-primary btn-lg rounded-pill mb-2" onclick="abrirReporte('https://app.powerbi.com/reportEmbed?reportId=b5b33fbb-ad6d-43f1-be9c-211a1025ad59&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa', 'DIT - FED MC-03')">
                     <i class="fas fa-eye"></i>
-                  </a>
+                  </button>
                 </div>
               </div>
               <div class="team-title p-4">
@@ -770,6 +778,182 @@ href="https://app.powerbi.com/reportEmbed?reportId=b5b33fbb-ad6d-43f1-be9c-211a1
     <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"
       ><i class="fa fa-arrow-up"></i
     ></a>
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-header border-0 pb-0">
+            <div class="text-center w-100 pt-2">
+              <div class="mb-2"><i class="fas fa-lock-open fa-2x text-primary"></i></div>
+              <h5 class="modal-title fw-bold" id="loginModalLabel">Acceso a Reportes</h5>
+              <p class="text-muted small">Ingresa tus credenciales para continuar</p>
+            </div>
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body px-4 pb-4">
+            <div id="login-error" class="alert alert-danger py-2 small d-none">
+              <i class="fas fa-exclamation-circle me-1"></i> Usuario o contraseña incorrectos.
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold text-muted">Usuario</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-primary"></i></span>
+                <input type="text" id="login-user" class="form-control border-start-0 ps-0" placeholder="Ingresa tu usuario" />
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label small fw-semibold text-muted">Contraseña</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0"><i class="fas fa-key text-primary"></i></span>
+                <input type="password" id="login-pass" class="form-control border-start-0 ps-0" placeholder="Ingresa tu contraseña" onkeydown="if(event.key==='Enter') validarLogin();" />
+                <button class="input-group-text bg-light" type="button" onclick="togglePass()"><i class="fas fa-eye" id="eye-icon"></i></button>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100 rounded-pill py-2 fw-semibold" onclick="validarLogin()">
+              <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+            </button>
+            <p class="text-center text-muted small mt-3 mb-0">¿Problemas para ingresar? Contacta al administrador.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Registros de Acceso -->
+    <div class="modal fade" id="accessLogModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="fas fa-history text-primary me-2"></i>Registro de Ingresos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body"><div id="access-log-content"></div></div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-danger btn-sm" onclick="limpiarRegistros()"><i class="fas fa-trash me-1"></i>Limpiar historial</button>
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── Sistema de usuarios compartido (localStorage) ─────────────────
+      const USUARIOS_DEFAULT = [
+        { user: "admin",    pass: "risch2024", nombre: "Administrador RISCH",      microred: "",               ipress: "",           rol: "admin",   activo: true },
+        { user: "redsalud", pass: "fed2024",   nombre: "Red de Salud Bagua",       microred: "Red Salud Bagua", ipress: "",           rol: "usuario", activo: true },
+        { user: "franz",    pass: "risch123",  nombre: "Franz Jensen Loja Zelada", microred: "Microred Bagua",  ipress: "C.S. Bagua", rol: "usuario", activo: true }
+      ];
+
+      function getUsuarios() {
+        const raw = localStorage.getItem("risch_usuarios");
+        if (!raw) { localStorage.setItem("risch_usuarios", JSON.stringify(USUARIOS_DEFAULT)); return USUARIOS_DEFAULT; }
+        return JSON.parse(raw);
+      }
+
+      let reporteDestino = "";
+
+      function abrirReporte(url, nombre) {
+        const sesion = JSON.parse(sessionStorage.getItem("risch_sesion") || "null");
+        if (sesion) {
+          registrarAcceso(sesion.usuario, nombre);
+          window.open(url, "_blank");
+        } else {
+          reporteDestino = url;
+          document.getElementById("login-error").classList.add("d-none");
+          document.getElementById("login-user").value = "";
+          document.getElementById("login-pass").value = "";
+          new bootstrap.Modal(document.getElementById("loginModal")).show();
+          setTimeout(() => document.getElementById("login-user").focus(), 400);
+        }
+      }
+
+      function validarLogin() {
+        const user = document.getElementById("login-user").value.trim().toLowerCase();
+        const pass = document.getElementById("login-pass").value;
+        const lista = getUsuarios();
+        const found = lista.find(u => u.user === user && u.pass === pass && u.activo);
+        if (found) {
+          const sesion = { usuario: user, nombre: found.nombre, microred: found.microred, ipress: found.ipress, rol: found.rol, hora: new Date().toLocaleString("es-PE") };
+          sessionStorage.setItem("risch_sesion", JSON.stringify(sesion));
+          mostrarPanelUsuario(sesion);
+          if (found.rol === "admin") document.getElementById("nav-registros").classList.remove("d-none");
+          bootstrap.Modal.getInstance(document.getElementById("loginModal")).hide();
+          if (reporteDestino) {
+            registrarAcceso(user, reporteDestino);
+            window.open(reporteDestino, "_blank");
+            reporteDestino = "";
+          }
+        } else {
+          document.getElementById("login-error").classList.remove("d-none");
+          document.getElementById("login-pass").value = "";
+        }
+      }
+
+      function mostrarPanelUsuario(sesion) {
+        const display = sesion.nombre ? `${sesion.nombre} (${sesion.usuario})` : sesion.usuario;
+        let extra = "";
+        if (sesion.ipress)   extra += ` &nbsp;|&nbsp; <i class="fas fa-hospital text-primary me-1"></i>${sesion.ipress}`;
+        if (sesion.microred) extra += ` &nbsp;|&nbsp; <i class="fas fa-network-wired text-primary me-1"></i>${sesion.microred}`;
+        document.getElementById("logged-username").innerHTML = display + extra;
+        document.getElementById("login-time").textContent = sesion.hora;
+        const p = document.getElementById("user-panel");
+        p.style.setProperty("display", "flex", "important");
+        p.style.justifyContent = "center";
+      }
+
+      function cerrarSesion() {
+        sessionStorage.removeItem("risch_sesion");
+        document.getElementById("user-panel").style.setProperty("display", "none", "important");
+        document.getElementById("nav-registros").classList.add("d-none");
+      }
+
+      function registrarAcceso(usuario, reporte) {
+        const sesion = JSON.parse(sessionStorage.getItem("risch_sesion") || "null");
+        const microred = sesion ? (sesion.microred || "Sin Microred") : "Sin Microred";
+        const logs = JSON.parse(localStorage.getItem("risch_accesos") || "[]");
+        logs.unshift({ usuario, reporte, microred, hora: new Date().toLocaleString("es-PE") });
+        if (logs.length > 200) logs.pop();
+        localStorage.setItem("risch_accesos", JSON.stringify(logs));
+      }
+
+      function verRegistros() {
+        const logs = JSON.parse(localStorage.getItem("risch_accesos") || "[]");
+        const el = document.getElementById("access-log-content");
+        if (!logs.length) {
+          el.innerHTML = '<p class="text-muted text-center py-3">No hay registros de acceso aún.</p>';
+        } else {
+          let html = '<div class="table-responsive"><table class="table table-sm table-hover"><thead class="table-primary"><tr><th>#</th><th>Usuario</th><th>Microred</th><th>Reporte</th><th>Fecha y Hora</th></tr></thead><tbody>';
+          logs.forEach((l, i) => {
+            html += `<tr><td>${i+1}</td><td><i class="fas fa-user me-1 text-primary"></i>${l.usuario}</td><td>${l.microred||'—'}</td><td>${l.reporte}</td><td><i class="fas fa-clock me-1 text-muted"></i>${l.hora}</td></tr>`;
+          });
+          html += "</tbody></table></div>";
+          el.innerHTML = html;
+        }
+        new bootstrap.Modal(document.getElementById("accessLogModal")).show();
+      }
+
+      function limpiarRegistros() {
+        if (confirm("¿Seguro que deseas eliminar todo el historial?")) {
+          localStorage.removeItem("risch_accesos");
+          document.getElementById("access-log-content").innerHTML = '<p class="text-muted text-center py-3">Historial eliminado.</p>';
+        }
+      }
+
+      function togglePass() {
+        const p = document.getElementById("login-pass"), ic = document.getElementById("eye-icon");
+        if (p.type === "password") { p.type = "text"; ic.className = "fas fa-eye-slash"; }
+        else { p.type = "password"; ic.className = "fas fa-eye"; }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        getUsuarios();
+        const sesion = JSON.parse(sessionStorage.getItem("risch_sesion") || "null");
+        if (sesion) {
+          mostrarPanelUsuario(sesion);
+          if (sesion.rol === "admin") document.getElementById("nav-registros").classList.remove("d-none");
+        }
+      });
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
