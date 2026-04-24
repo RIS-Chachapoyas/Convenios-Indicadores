@@ -1,48 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>RISCH - Nosotros</title>
+    <link rel="shortcut icon" href="img/logo_risch.jpg" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
 
-    <head>
-        <meta charset="utf-8">
-        <title>RISCH - Nosotros</title>
-        <link rel="shortcut icon" href="img/logo_risch.jpg" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="keywords">
-        <meta content="" name="description">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap"
+      rel="stylesheet"
+    />
 
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
-        <!-- Icon Font Stylesheet -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" href="lib/animate/animate.min.css" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
 
-        <!-- Libraries Stylesheet -->
-        <link rel="stylesheet" href="lib/animate/animate.min.css"/>
-        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
 
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
 
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+  <body>
+    <!-- Spinner Start -->
+    <div
+      id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+    >
+      <div
+        class="spinner-border text-primary"
+        style="width: 3rem; height: 3rem"
+        role="status"
+      >
+        <span class="sr-only">Cargando...</span>
+      </div>
+    </div>
+    <!-- Spinner End -->
 
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-
-    <body>
-
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Cargando...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
-
-        <!-- Topbar Start -->
-        <div
+    <!-- Topbar Start -->
+    <div
       class="container-fluid topbar px-0 px-lg-4 bg-light py-2 d-none d-lg-block"
     >
       <div class="container">
@@ -86,10 +99,10 @@
         </div>
       </div>
     </div>
-        <!-- Topbar End -->
+    <!-- Topbar End -->
 
-        <!-- Navbar & Hero Start -->
-        <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
           <a href="index.html" class="navbar-brand p-0">
@@ -110,14 +123,13 @@
             <div class="navbar-nav mx-0 mx-lg-auto">
               <a href="index.html" class="nav-item nav-link">Inicio</a>
               <!--Seguimiento-->
-              <a href="salud_sexual.html" class="nav-item nav-link"
-                >Salud Sexual</a
-              >
-              <a href="salud_mental.html" class="nav-item nav-link"
-                >Salud Mental</a
-              >
+              <a href="salud_sexual.html" class="nav-item nav-link">ESARE</a>
+
+              <!--<a href="salud_mental.html" class="nav-item nav-link">Salud Mental</a>-->
               <a href="dit.html" class="nav-item nav-link">DIT</a>
-              <a href="nosotros.html" class="nav-item nav-link active">Nosotros</a>
+              <a href="nosotros.html" class="nav-item nav-link active"
+                >Nosotros</a
+              >
 
               <!--
               <div class="nav-item dropdown">
@@ -138,9 +150,21 @@
               -->
 
               <a href="contact.html" class="nav-item nav-link">Contacto</a>
+              <a
+                href="#"
+                id="nav-registros"
+                class="nav-item nav-link d-none"
+                onclick="
+                  verRegistros();
+                  return false;
+                "
+              >
+                <i class="fas fa-history me-1"></i>Registros
+              </a>
             </div>
           </div>
           <div class="d-none d-xl-flex flex-shrink-0 ps-4">
+            
             <div class="d-flex flex-column ms-3">
               <img src="img/logo_red.jpg" class="img-fluid w-50" alt="" />
             </div>
@@ -148,30 +172,76 @@
         </nav>
       </div>
     </div>
-        <!-- Navbar & Hero End -->
+    <!-- Navbar & Hero End -->
 
-        <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Buscar</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center bg-primary">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="btn bg-light border nput-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
-                    </div>
-                </div>
+    <!-- User Panel -->
+    <div
+      id="user-panel"
+      style="display: none !important; justify-content: center"
+      class="py-2 bg-light"
+    >
+      <div
+        class="d-inline-flex align-items-center bg-white rounded-pill px-4 py-2 shadow-sm"
+      >
+        <i class="fas fa-user-circle text-primary me-2 fa-lg"></i>
+        <span class="me-3"
+          >Bienvenido, <strong id="logged-username"></strong
+        ></span>
+        <span class="text-muted small me-3"
+          ><i class="fas fa-clock text-primary me-1"></i>Ingreso:
+          <span id="login-time"></span
+        ></span>
+        <button
+          class="btn btn-sm btn-outline-danger rounded-pill"
+          onclick="cerrarSesion()"
+        >
+          <i class="fas fa-sign-out-alt me-1"></i>Salir
+        </button>
+      </div>
+    </div>
+    <!-- User Panel End -->
+
+    <!-- Modal Search Start -->
+    <div
+      class="modal fade"
+      id="searchModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content rounded-0">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Buscar</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body d-flex align-items-center bg-primary">
+            <div class="input-group w-75 mx-auto d-flex">
+              <input
+                type="search"
+                class="form-control p-3"
+                placeholder="keywords"
+                aria-describedby="search-icon-1"
+              />
+              <span
+                id="search-icon-1"
+                class="btn bg-light border nput-group-text p-3"
+                ><i class="fa fa-search"></i
+              ></span>
             </div>
+          </div>
         </div>
-        <!-- Modal Search End -->
+      </div>
+    </div>
+    <!-- Modal Search End -->
 
-
-        <!-- Header Start -->
-        <div class="container-fluid bg-breadcrumb">
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
       <div class="container text-center py-5" style="max-width: 900px">
         <h4
           class="text-white display-4 mb-4 wow fadeInDown"
@@ -186,11 +256,10 @@
                 </ol>    -->
       </div>
     </div>
-        <!-- Header End -->
+    <!-- Header End -->
 
-
-        <!-- Team Start -->
-       <div class="container-fluid team py-5">
+    <!-- Team Start -->
+    <div class="container-fluid team py-5">
       <div class="container py-5">
         <div
           class="text-center mx-auto pb-5 wow fadeInUp"
@@ -210,43 +279,41 @@
           </p>
         </div>
         <div class="row g-4">
-         
           <center>
-          <div
-            class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp"
-            data-wow-delay="0.8s"
-          >
-            <div class="team-item">
-              <div class="team-img">
-                <img
-                  src="img/logo_risch.jpg"
-                  class="img-fluid rounded-top w-100"
-                  alt=""
-                />
-                <div class="team-icon">
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href="https://www.facebook.com/redintegradadesaludchachapoyasoficial?rdid=6bPwqfHuHSJ4avz1&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15aFUcwc6U%2F#"
-                    target="_blank"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
+            <div
+              class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp"
+              data-wow-delay="0.8s"
+            >
+              <div class="team-item">
+                <div class="team-img">
+                  <img
+                    src="img/logo_risch.jpg"
+                    class="img-fluid rounded-top w-100"
+                    alt=""
+                  />
+                  <div class="team-icon">
+                    <a
+                      class="btn btn-primary btn-sm-square rounded-pill mb-2"
+                      href="https://www.facebook.com/redintegradadesaludchachapoyasoficial?rdid=6bPwqfHuHSJ4avz1&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15aFUcwc6U%2F#"
+                      target="_blank"
+                      ><i class="fab fa-facebook-f"></i
+                    ></a>
+                  </div>
+                </div>
+                <div class="team-title p-4">
+                  <h4 class="mb-0">RISCH</h4>
+                  <p class="mb-0">ESSSR</p>
                 </div>
               </div>
-              <div class="team-title p-4">
-                <h4 class="mb-0">RISCH</h4>
-                <p class="mb-0">ESSSR</p>
-              </div>
             </div>
-          </div>
           </center>
         </div>
       </div>
     </div>
-        <!-- Team End -->
+    <!-- Team End -->
 
-
-        <!-- Footer Start -->
-        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+    <!-- Footer Start -->
+    <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
       <div class="container py-5">
         <div class="row g-5">
           <div class="col-xl-9">
@@ -513,10 +580,10 @@
         </div>
       </div>
     </div>
-        <!-- Footer End -->
-        
-        <!-- Copyright Start -->
-        <div class="container-fluid copyright py-4">
+    <!-- Footer End -->
+
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright py-4">
       <div class="container">
         <div class="row g-4 align-items-center">
           <div class="col-md-6 text-center text-md-end mb-md-0">
@@ -551,27 +618,162 @@
         </div>
       </div>
     </div>
-        <!-- Copyright End -->
+    <!-- Copyright End -->
 
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"
+      ><i class="fa fa-arrow-up"></i
+    ></a>
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+    <!-- Modal Registro de Accesos -->
+    <div
+      class="modal fade"
+      id="accessLogModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+      >
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-history text-primary me-2"></i>Registro de
+              Ingresos
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body"><div id="access-log-content"></div></div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-outline-danger btn-sm"
+              onclick="limpiarRegistros()"
+            >
+              <i class="fas fa-trash me-1"></i>Limpiar historial
+            </button>
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        
-        <!-- JavaScript Libraries -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/wow/wow.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="lib/counterup/counterup.min.js"></script>
-        <script src="lib/lightbox/js/lightbox.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        
+    <script>
+      const USUARIOS_DEFAULT = [
+        {
+          user: "admin",
+          pass: "risch2024",
+          nombre: "Administrador RISCH",
+          microred: "",
+          ipress: "",
+          rol: "admin",
+          activo: true,
+        },
+        {
+          user: "redsalud",
+          pass: "fed2024",
+          nombre: "Red de Salud Bagua",
+          microred: "Red Salud Bagua",
+          ipress: "",
+          rol: "usuario",
+          activo: true,
+        },
+        {
+          user: "franz",
+          pass: "risch123",
+          nombre: "Franz Jensen Loja Zelada",
+          microred: "Microred Bagua",
+          ipress: "C.S. Bagua",
+          rol: "usuario",
+          activo: true,
+        },
+      ];
+      function getUsuarios() {
+        const raw = localStorage.getItem("risch_usuarios");
+        if (!raw) {
+          localStorage.setItem(
+            "risch_usuarios",
+            JSON.stringify(USUARIOS_DEFAULT),
+          );
+          return USUARIOS_DEFAULT;
+        }
+        return JSON.parse(raw);
+      }
+      function mostrarPanelUsuario(sesion) {
+        const display = sesion.nombre
+          ? `${sesion.nombre} (${sesion.usuario})`
+          : sesion.usuario;
+        let extra = "";
+        if (sesion.ipress)
+          extra += ` &nbsp;|&nbsp; <i class="fas fa-hospital text-primary me-1"></i>${sesion.ipress}`;
+        if (sesion.microred)
+          extra += ` &nbsp;|&nbsp; <i class="fas fa-network-wired text-primary me-1"></i>${sesion.microred}`;
+        document.getElementById("logged-username").innerHTML = display + extra;
+        document.getElementById("login-time").textContent = sesion.hora;
+        const p = document.getElementById("user-panel");
+        p.style.setProperty("display", "flex", "important");
+        p.style.justifyContent = "center";
+      }
+      function cerrarSesion() {
+        sessionStorage.removeItem("risch_sesion");
+        document
+          .getElementById("user-panel")
+          .style.setProperty("display", "none", "important");
+        document.getElementById("nav-registros").classList.add("d-none");
+      }
+      function verRegistros() {
+        const logs = JSON.parse(localStorage.getItem("risch_accesos") || "[]");
+        const el = document.getElementById("access-log-content");
+        if (!logs.length) {
+          el.innerHTML =
+            '<p class="text-muted text-center py-3">No hay registros de acceso aún.</p>';
+        } else {
+          let html =
+            '<div class="table-responsive"><table class="table table-sm table-hover"><thead class="table-primary"><tr><th>#</th><th>Usuario</th><th>Microred</th><th>Reporte</th><th>Fecha y Hora</th></tr></thead><tbody>';
+          logs.forEach((l, i) => {
+            html += `<tr><td>${i + 1}</td><td><i class="fas fa-user me-1 text-primary"></i>${l.usuario}</td><td>${l.microred || "—"}</td><td>${l.reporte}</td><td><i class="fas fa-clock me-1 text-muted"></i>${l.hora}</td></tr>`;
+          });
+          html += "</tbody></table></div>";
+          el.innerHTML = html;
+        }
+        new bootstrap.Modal(document.getElementById("accessLogModal")).show();
+      }
+      function limpiarRegistros() {
+        if (confirm("¿Seguro que deseas eliminar todo el historial?")) {
+          localStorage.removeItem("risch_accesos");
+          document.getElementById("access-log-content").innerHTML =
+            '<p class="text-muted text-center py-3">Historial eliminado.</p>';
+        }
+      }
+      window.addEventListener("DOMContentLoaded", () => {
+        getUsuarios();
+        const sesion = JSON.parse(
+          sessionStorage.getItem("risch_sesion") || "null",
+        );
+        if (sesion) {
+          mostrarPanelUsuario(sesion);
+          if (sesion.rol === "admin")
+            document.getElementById("nav-registros").classList.remove("d-none");
+        }
+      });
+    </script>
 
-        <!-- Template Javascript -->
-        <script src="js/main.js"></script>
-    </body>
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+  </body>
 </html>
-
