@@ -122,8 +122,8 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav mx-0 mx-lg-auto">
               <a href="index.html" class="nav-item nav-link active">Inicio</a> <!--Seguimiento-->
-              <a href="salud_sexual.html" class="nav-item nav-link">Salud Sexual</a>
-              <a href="salud_mental.html" class="nav-item nav-link">Salud Mental</a>
+              <a href="salud_sexual.html" class="nav-item nav-link">ESARE</a>
+              <!--<a href="salud_mental.html" class="nav-item nav-link">Salud Mental</a>-->
               <a href="dit.html" class="nav-item nav-link">DIT</a>
               <a href="nosotros.html" class="nav-item nav-link">Nosotros</a>
     
@@ -146,6 +146,9 @@
               -->
 
               <a href="contact.html" class="nav-item nav-link">Contacto</a>
+              <a href="#" id="nav-registros" class="nav-item nav-link d-none" onclick="verRegistros(); return false;">
+                <i class="fas fa-history me-1"></i>Registros
+              </a>
             </div>
           </div>
           <div class="d-none d-xl-flex flex-shrink-0 ps-4">
@@ -269,7 +272,19 @@
           </p>
         </div>
         
-        <div class="row g-4 justify-content-center"> <!-- Added 'justify-content-center' -->
+        <!-- Panel de usuario logueado -->
+        <div id="user-panel" class="text-center mb-4" style="display:none!important;">
+          <div class="d-inline-flex align-items-center bg-white rounded-pill px-4 py-2 shadow-sm">
+            <i class="fas fa-user-circle text-primary me-2 fa-lg"></i>
+            <span class="me-3">Bienvenido, <strong id="logged-username"></strong></span>
+            <span class="text-muted small me-3"><i class="fas fa-clock text-primary me-1"></i>Ingreso: <span id="login-time"></span></span>
+            <button class="btn btn-sm btn-outline-danger rounded-pill" onclick="cerrarSesion()">
+              <i class="fas fa-sign-out-alt me-1"></i>Salir
+            </button>
+          </div>
+        </div>
+        
+        <div class="row g-4 justify-content-center">
           <!-- Bloque 1: Seguimiento de Atenciones -->
           <div class="col-md-6 col-lg-5 col-xl-4 wow fadeInUp" data-wow-delay="0.4s"> <!-- Ajuste de columnas para centrar -->
             <div class="feature-item p-4 pt-0 text-center"> <!-- Added 'text-center' -->
@@ -280,10 +295,10 @@
               <p class="mb-4">
                 Reporte para el Monitoreo continuo y personalizado, garantiza el monitoreo integral de las atenciones brindadas al paciente, todas ellas dentro del HISMINSA
               </p>
-              <a class="btn btn-primary rounded-pill py-2 px-4" target="_blank" 
-                href="https://app.powerbi.com/reportEmbed?reportId=b5358ad2-c83d-4ed6-86ea-b3444d264046&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa">
+              <button class="btn btn-primary rounded-pill py-2 px-4"
+                onclick="abrirReporte('https://app.powerbi.com/reportEmbed?reportId=b5358ad2-c83d-4ed6-86ea-b3444d264046&autoAuth=true&ctid=97570966-515f-4269-acc1-d7dbfb58e5aa', 'Seguimiento de Atenciones')">
                 Ver Detalles <i class="fas fa-arrow-right ms-2"></i>
-              </a>
+              </button>
             </div>
           </div>
       
@@ -292,6 +307,190 @@
       </div>
     </div>
     <!-- Feature End -->
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-header border-0 pb-0">
+            <div class="text-center w-100 pt-2">
+              <div class="mb-2">
+                <i class="fas fa-lock-open fa-2x text-primary"></i>
+              </div>
+              <h5 class="modal-title fw-bold" id="loginModalLabel">Acceso a Reportes</h5>
+              <p class="text-muted small">Ingresa tus credenciales para continuar</p>
+            </div>
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body px-4 pb-4">
+            <div id="login-error" class="alert alert-danger py-2 small d-none">
+              <i class="fas fa-exclamation-circle me-1"></i> Usuario o contraseña incorrectos.
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold text-muted">Usuario</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-primary"></i></span>
+                <input type="text" id="login-user" class="form-control border-start-0 ps-0" placeholder="Ingresa tu usuario" />
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="form-label small fw-semibold text-muted">Contraseña</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0"><i class="fas fa-key text-primary"></i></span>
+                <input type="password" id="login-pass" class="form-control border-start-0 ps-0" placeholder="Ingresa tu contraseña" onkeydown="if(event.key==='Enter') validarLogin()" />
+                <button class="input-group-text bg-light" type="button" onclick="togglePass()"><i class="fas fa-eye" id="eye-icon"></i></button>
+              </div>
+            </div>
+            <button class="btn btn-primary w-100 rounded-pill py-2 fw-semibold" onclick="validarLogin()">
+              <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+            </button>
+            <p class="text-center text-muted small mt-3 mb-0">¿Problemas para ingresar? Contacta al administrador.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Login End -->
+
+    <!-- Modal Registro de Accesos -->
+    <div class="modal fade" id="accessLogModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="fas fa-history text-primary me-2"></i>Registro de Ingresos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div id="access-log-content"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-danger btn-sm" onclick="limpiarRegistros()"><i class="fas fa-trash me-1"></i>Limpiar historial</button>
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Registro End -->
+
+<script>
+      // ── Usuarios: mismo sistema que salud_sexual.html (localStorage) ──
+      const USUARIOS_DEFAULT = [
+        { user: "admin",    pass: "risch2024", nombre: "Administrador RISCH",      microred: "",               ipress: "",            rol: "admin",   activo: true },
+        { user: "redsalud", pass: "fed2024",   nombre: "Red de Salud Bagua",       microred: "Red Salud Bagua", ipress: "",            rol: "usuario", activo: true },
+        { user: "franz",    pass: "risch123",  nombre: "Franz Jensen Loja Zelada", microred: "Microred Bagua",  ipress: "C.S. Bagua",  rol: "usuario", activo: true }
+      ];
+
+      function getUsuarios() {
+        const raw = localStorage.getItem("risch_usuarios");
+        if (!raw) { localStorage.setItem("risch_usuarios", JSON.stringify(USUARIOS_DEFAULT)); return USUARIOS_DEFAULT; }
+        return JSON.parse(raw);
+      }
+
+      let reporteDestino = "";
+
+      function abrirReporte(url, nombre) {
+        const sesion = JSON.parse(sessionStorage.getItem("risch_sesion") || "null");
+        if (sesion) {
+          registrarAcceso(sesion.usuario, nombre);
+          window.open(url, "_blank");
+        } else {
+          reporteDestino = url;
+          document.getElementById("login-error").classList.add("d-none");
+          document.getElementById("login-user").value = "";
+          document.getElementById("login-pass").value = "";
+          new bootstrap.Modal(document.getElementById("loginModal")).show();
+          setTimeout(() => document.getElementById("login-user").focus(), 400);
+        }
+      }
+
+      function validarLogin() {
+        const user = document.getElementById("login-user").value.trim().toLowerCase();
+        const pass = document.getElementById("login-pass").value;
+        const lista = getUsuarios();
+        const found = lista.find(u => u.user === user && u.pass === pass && u.activo);
+        if (found) {
+          const sesion = { usuario: user, nombre: found.nombre, microred: found.microred, ipress: found.ipress, rol: found.rol, hora: new Date().toLocaleString("es-PE") };
+          sessionStorage.setItem("risch_sesion", JSON.stringify(sesion));
+          mostrarPanelUsuario(sesion);
+          if (found.rol === "admin") document.getElementById("nav-registros").classList.remove("d-none");
+          bootstrap.Modal.getInstance(document.getElementById("loginModal")).hide();
+          if (reporteDestino) {
+            registrarAcceso(user, "Reporte");
+            window.open(reporteDestino, "_blank");
+            reporteDestino = "";
+          }
+        } else {
+          document.getElementById("login-error").classList.remove("d-none");
+          document.getElementById("login-pass").value = "";
+        }
+      }
+
+      function mostrarPanelUsuario(sesion) {
+        const display = sesion.nombre ? `${sesion.nombre} (${sesion.usuario})` : sesion.usuario;
+        let extra = "";
+        if (sesion.ipress)   extra += ` &nbsp;|&nbsp; <i class="fas fa-hospital text-primary me-1"></i>${sesion.ipress}`;
+        if (sesion.microred) extra += ` &nbsp;|&nbsp; <i class="fas fa-network-wired text-primary me-1"></i>${sesion.microred}`;
+        document.getElementById("logged-username").innerHTML = display + extra;
+        document.getElementById("login-time").textContent = sesion.hora;
+        const p = document.getElementById("user-panel");
+        p.style.setProperty("display", "flex", "important");
+        p.style.justifyContent = "center";
+      }
+
+      function cerrarSesion() {
+        sessionStorage.removeItem("risch_sesion");
+        document.getElementById("user-panel").style.setProperty("display", "none", "important");
+        document.getElementById("nav-registros").classList.add("d-none");
+      }
+
+      function registrarAcceso(usuario, reporte) {
+        const sesion = JSON.parse(sessionStorage.getItem("risch_sesion") || "null");
+        const microred = sesion ? (sesion.microred || "Sin Microred") : "Sin Microred";
+        const logs = JSON.parse(localStorage.getItem("risch_accesos") || "[]");
+        logs.unshift({ usuario, reporte, microred, hora: new Date().toLocaleString("es-PE") });
+        if (logs.length > 200) logs.pop();
+        localStorage.setItem("risch_accesos", JSON.stringify(logs));
+      }
+
+      function verRegistros() {
+        // Redirigir a salud_sexual.html#admin para abrir panel ahí,
+        // o mostrar modal simple de accesos si se quiere en index también
+        const logs = JSON.parse(localStorage.getItem("risch_accesos") || "[]");
+        const el = document.getElementById("access-log-content");
+        if (logs.length === 0) {
+          el.innerHTML = '<p class="text-muted text-center py-3">No hay registros de acceso aún.</p>';
+        } else {
+          let html = '<div class="table-responsive"><table class="table table-sm table-hover"><thead class="table-primary"><tr><th>#</th><th>Usuario</th><th>Reporte</th><th>Fecha y Hora</th></tr></thead><tbody>';
+          logs.forEach((l, i) => {
+            html += `<tr><td>${i+1}</td><td><i class="fas fa-user me-1 text-primary"></i>${l.usuario}</td><td>${l.reporte}</td><td><i class="fas fa-clock me-1 text-muted"></i>${l.hora}</td></tr>`;
+          });
+          html += "</tbody></table></div>";
+          el.innerHTML = html;
+        }
+        new bootstrap.Modal(document.getElementById("accessLogModal")).show();
+      }
+
+      function limpiarRegistros() {
+        if (confirm("¿Seguro que deseas eliminar todo el historial?")) {
+          localStorage.removeItem("risch_accesos");
+          document.getElementById("access-log-content").innerHTML = '<p class="text-muted text-center py-3">Historial eliminado.</p>';
+        }
+      }
+
+      function togglePass() {
+        const p = document.getElementById("login-pass"), ic = document.getElementById("eye-icon");
+        if (p.type === "password") { p.type = "text"; ic.className = "fas fa-eye-slash"; }
+        else { p.type = "password"; ic.className = "fas fa-eye"; }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        getUsuarios(); // inicializar si no existen
+        const sesion = JSON.parse(sessionStorage.getItem("risch_sesion") || "null");
+        if (sesion) {
+          mostrarPanelUsuario(sesion);
+          if (sesion.rol === "admin") document.getElementById("nav-registros").classList.remove("d-none");
+        }
+      });
+    </script>
 
     <!-- About Start -->
     <div class="container-fluid bg-light about pb-5">
@@ -483,570 +682,6 @@
       </div>
     </div>
     <!-- FAQs End -->
-
-    <!-- FAQs Start -->
-<!-- 
-    <div class="container-fluid faq-section bg-light py-5">
-      <div class="container py-5">
-        <div class="row g-5 align-items-center">
-          <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
-            <div class="h-100">
-              <div class="mb-5">
-                <h4 class="text-primary">Some Important FAQ's</h4>
-                <h1 class="display-4 mb-0">
-                  Common Frequently Asked Questions
-                </h1>
-              </div>
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button
-                      class="accordion-button border-0"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseOne"
-                      aria-expanded="true"
-                      aria-controls="collapseOne"
-                    >
-                      Q: What happens during Freshers' Week?
-                    </button>
-                  </h2>
-                  <div
-                    id="collapseOne"
-                    class="accordion-collapse collapse show active"
-                    aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div class="accordion-body rounded">
-                      A: Leverage agile frameworks to provide a robust synopsis
-                      for high level overviews. Iterative approaches to
-                      corporate strategy foster collaborative thinking to
-                      further the overall value proposition. Organically grow
-                      the holistic world view of disruptive innovation via
-                      workplace diversity and empowerment.
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="collapseTwo"
-                    >
-                      Q: What is the transfer application process?
-                    </button>
-                  </h2>
-                  <div
-                    id="collapseTwo"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="headingTwo"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div class="accordion-body">
-                      A: Leverage agile frameworks to provide a robust synopsis
-                      for high level overviews. Iterative approaches to
-                      corporate strategy foster collaborative thinking to
-                      further the overall value proposition. Organically grow
-                      the holistic world view of disruptive innovation via
-                      workplace diversity and empowerment.
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingThree">
-                    <button
-                      class="accordion-button collapsed"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseThree"
-                      aria-expanded="false"
-                      aria-controls="collapseThree"
-                    >
-                      Q: Why should I attend community college?
-                    </button>
-                  </h2>
-                  <div
-                    id="collapseThree"
-                    class="accordion-collapse collapse"
-                    aria-labelledby="headingThree"
-                    data-bs-parent="#accordionExample"
-                  >
-                    <div class="accordion-body">
-                      A: Leverage agile frameworks to provide a robust synopsis
-                      for high level overviews. Iterative approaches to
-                      corporate strategy foster collaborative thinking to
-                      further the overall value proposition. Organically grow
-                      the holistic world view of disruptive innovation via
-                      workplace diversity and empowerment.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.4s">
-            <img src="img/carousel-2.png" class="img-fluid w-100" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
--->
-    <!-- FAQs End -->
-
-    <!-- Blog Start -->
-<!--
-    <div class="container-fluid blog py-5">
-      <div class="container py-5">
-        <div
-          class="text-center mx-auto pb-5 wow fadeInUp"
-          data-wow-delay="0.2s"
-          style="max-width: 800px"
-        >
-          <h4 class="text-primary">From Blog</h4>
-          <h1 class="display-4 mb-4">News And Updates</h1>
-          <p class="mb-0">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur
-            adipisci facilis cupiditate recusandae aperiam temporibus corporis
-            itaque quis facere, numquam, ad culpa deserunt sint dolorem autem
-            obcaecati, ipsam mollitia hic.
-          </p>
-        </div>
-        <div class="row g-4 justify-content-center">
-          <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
-            <div class="blog-item">
-              <div class="blog-img">
-                <img
-                  src="img/blog-1.png"
-                  class="img-fluid rounded-top w-100"
-                  alt=""
-                />
-                <div class="blog-categiry py-2 px-4">
-                  <span>Business</span>
-                </div>
-              </div>
-              <div class="blog-content p-4">
-                <div class="blog-comment d-flex justify-content-between mb-3">
-                  <div class="small">
-                    <span class="fa fa-user text-primary"></span> Martin.C
-                  </div>
-                  <div class="small">
-                    <span class="fa fa-calendar text-primary"></span> 30 Dec
-                    2025
-                  </div>
-                  <div class="small">
-                    <span class="fa fa-comment-alt text-primary"></span> 6
-                    Comments
-                  </div>
-                </div>
-                <a href="#" class="h4 d-inline-block mb-3"
-                  >Which allows you to pay down insurance bills</a
-                >
-                <p class="mb-3">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius
-                  libero soluta impedit eligendi? Quibusdam, laudantium.
-                </p>
-                <a href="#" class="btn p-0"
-                  >Read More <i class="fa fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.4s">
-            <div class="blog-item">
-              <div class="blog-img">
-                <img
-                  src="img/blog-2.png"
-                  class="img-fluid rounded-top w-100"
-                  alt=""
-                />
-                <div class="blog-categiry py-2 px-4">
-                  <span>Business</span>
-                </div>
-              </div>
-              <div class="blog-content p-4">
-                <div class="blog-comment d-flex justify-content-between mb-3">
-                  <div class="small">
-                    <span class="fa fa-user text-primary"></span> Martin.C
-                  </div>
-                  <div class="small">
-                    <span class="fa fa-calendar text-primary"></span> 30 Dec
-                    2025
-                  </div>
-                  <div class="small">
-                    <span class="fa fa-comment-alt text-primary"></span> 6
-                    Comments
-                  </div>
-                </div>
-                <a href="#" class="h4 d-inline-block mb-3"
-                  >Leverage agile frameworks to provide</a
-                >
-                <p class="mb-3">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius
-                  libero soluta impedit eligendi? Quibusdam, laudantium.
-                </p>
-                <a href="#" class="btn p-0"
-                  >Read More <i class="fa fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.6s">
-            <div class="blog-item">
-              <div class="blog-img">
-                <img
-                  src="img/blog-3.png"
-                  class="img-fluid rounded-top w-100"
-                  alt=""
-                />
-                <div class="blog-categiry py-2 px-4">
-                  <span>Business</span>
-                </div>
-              </div>
-              <div class="blog-content p-4">
-                <div class="blog-comment d-flex justify-content-between mb-3">
-                  <div class="small">
-                    <span class="fa fa-user text-primary"></span> Martin.C
-                  </div>
-                  <div class="small">
-                    <span class="fa fa-calendar text-primary"></span> 30 Dec
-                    2025
-                  </div>
-                  <div class="small">
-                    <span class="fa fa-comment-alt text-primary"></span> 6
-                    Comments
-                  </div>
-                </div>
-                <a href="#" class="h4 d-inline-block mb-3"
-                  >Leverage agile frameworks to provide</a
-                >
-                <p class="mb-3">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius
-                  libero soluta impedit eligendi? Quibusdam, laudantium.
-                </p>
-                <a href="#" class="btn p-0"
-                  >Read More <i class="fa fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
--->
-    <!-- Blog End -->
-
-    <!-- Team Start -->
-<!--
-    <div class="container-fluid team pb-5">
-      <div class="container pb-5">
-        <div
-          class="text-center mx-auto pb-5 wow fadeInUp"
-          data-wow-delay="0.2s"
-          style="max-width: 800px"
-        >
-          <h4 class="text-primary">Our Team</h4>
-          <h1 class="display-4 mb-4">Meet Our Expert Team Members</h1>
-          <p class="mb-0">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur
-            adipisci facilis cupiditate recusandae aperiam temporibus corporis
-            itaque quis facere, numquam, ad culpa deserunt sint dolorem autem
-            obcaecati, ipsam mollitia hic.
-          </p>
-        </div>
-        <div class="row g-4">
-          <div
-            class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp"
-            data-wow-delay="0.2s"
-          >
-            <div class="team-item">
-              <div class="team-img">
-                <img
-                  src="img/team-1.jpg"
-                  class="img-fluid rounded-top w-100"
-                  alt=""
-                />
-                <div class="team-icon">
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-0"
-                    href=""
-                    ><i class="fab fa-instagram"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="team-title p-4">
-                <h4 class="mb-0">David James</h4>
-                <p class="mb-0">Profession</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp"
-            data-wow-delay="0.4s"
-          >
-            <div class="team-item">
-              <div class="team-img">
-                <img
-                  src="img/team-2.jpg"
-                  class="img-fluid rounded-top w-100"
-                  alt=""
-                />
-                <div class="team-icon">
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-0"
-                    href=""
-                    ><i class="fab fa-instagram"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="team-title p-4">
-                <h4 class="mb-0">David James</h4>
-                <p class="mb-0">Profession</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp"
-            data-wow-delay="0.6s"
-          >
-            <div class="team-item">
-              <div class="team-img">
-                <img
-                  src="img/team-3.jpg"
-                  class="img-fluid rounded-top w-100"
-                  alt=""
-                />
-                <div class="team-icon">
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-0"
-                    href=""
-                    ><i class="fab fa-instagram"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="team-title p-4">
-                <h4 class="mb-0">David James</h4>
-                <p class="mb-0">Profession</p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp"
-            data-wow-delay="0.8s"
-          >
-            <div class="team-item">
-              <div class="team-img">
-                <img
-                  src="img/team-4.jpg"
-                  class="img-fluid rounded-top w-100"
-                  alt=""
-                />
-                <div class="team-icon">
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-2"
-                    href=""
-                    ><i class="fab fa-linkedin-in"></i
-                  ></a>
-                  <a
-                    class="btn btn-primary btn-sm-square rounded-pill mb-0"
-                    href=""
-                    ><i class="fab fa-instagram"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="team-title p-4">
-                <h4 class="mb-0">David James</h4>
-                <p class="mb-0">Profession</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
--->
-    <!-- Team End -->
-
-    <!-- Testimonial Start -->
-<!--
-    <div class="container-fluid testimonial pb-5">
-      <div class="container pb-5">
-        <div
-          class="text-center mx-auto pb-5 wow fadeInUp"
-          data-wow-delay="0.2s"
-          style="max-width: 800px"
-        >
-          <h4 class="text-primary">Testimonial</h4>
-          <h1 class="display-4 mb-4">What Our Customers Are Saying</h1>
-          <p class="mb-0">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur
-            adipisci facilis cupiditate recusandae aperiam temporibus corporis
-            itaque quis facere, numquam, ad culpa deserunt sint dolorem autem
-            obcaecati, ipsam mollitia hic.
-          </p>
-        </div>
-        <div
-          class="owl-carousel testimonial-carousel wow fadeInUp"
-          data-wow-delay="0.2s"
-        >
-          <div class="testimonial-item bg-light rounded">
-            <div class="row g-0">
-              <div class="col-4 col-lg-4 col-xl-3">
-                <div class="h-100">
-                  <img
-                    src="img/testimonial-1.jpg"
-                    class="img-fluid h-100 rounded"
-                    style="object-fit: cover"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div class="col-8 col-lg-8 col-xl-9">
-                <div class="d-flex flex-column my-auto text-start p-4">
-                  <h4 class="text-dark mb-0">Client Name</h4>
-                  <p class="mb-3">Profession</p>
-                  <div class="d-flex text-primary mb-3">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                  </div>
-                  <p class="mb-0">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Enim error molestiae aut modi corrupti fugit eaque rem nulla
-                    incidunt temporibus quisquam,
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-item bg-light rounded">
-            <div class="row g-0">
-              <div class="col-4 col-lg-4 col-xl-3">
-                <div class="h-100">
-                  <img
-                    src="img/testimonial-2.jpg"
-                    class="img-fluid h-100 rounded"
-                    style="object-fit: cover"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div class="col-8 col-lg-8 col-xl-9">
-                <div class="d-flex flex-column my-auto text-start p-4">
-                  <h4 class="text-dark mb-0">Client Name</h4>
-                  <p class="mb-3">Profession</p>
-                  <div class="d-flex text-primary mb-3">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star text-body"></i>
-                  </div>
-                  <p class="mb-0">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Enim error molestiae aut modi corrupti fugit eaque rem nulla
-                    incidunt temporibus quisquam,
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-item bg-light rounded">
-            <div class="row g-0">
-              <div class="col-4 col-lg-4 col-xl-3">
-                <div class="h-100">
-                  <img
-                    src="img/testimonial-3.jpg"
-                    class="img-fluid h-100 rounded"
-                    style="object-fit: cover"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div class="col-8 col-lg-8 col-xl-9">
-                <div class="d-flex flex-column my-auto text-start p-4">
-                  <h4 class="text-dark mb-0">Client Name</h4>
-                  <p class="mb-3">Profession</p>
-                  <div class="d-flex text-primary mb-3">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star text-body"></i>
-                    <i class="fas fa-star text-body"></i>
-                  </div>
-                  <p class="mb-0">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Enim error molestiae aut modi corrupti fugit eaque rem nulla
-                    incidunt temporibus quisquam,
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
--->
-    <!-- Testimonial End -->
 
     <!-- Footer Start -->
     <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
