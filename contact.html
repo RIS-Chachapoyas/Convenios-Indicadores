@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -105,7 +105,7 @@
     <div class="container-fluid nav-bar px-0 px-lg-4 py-lg-0">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-          <a href="#" class="navbar-brand p-0">
+          <a href="index.html" class="navbar-brand p-0">
             <h1 class="text-primary mb-0">
               <i class="fab fa-slack me-2"></i> RISCH
             </h1>
@@ -123,12 +123,9 @@
             <div class="navbar-nav mx-0 mx-lg-auto">
               <a href="index.html" class="nav-item nav-link">Inicio</a>
               <!--Seguimiento-->
-              <a href="salud_sexual.html" class="nav-item nav-link"
-                >Salud Sexual</a
-              >
-              <a href="salud_mental.html" class="nav-item nav-link"
-                >Salud Mental</a
-              >
+              <a href="salud_sexual.html" class="nav-item nav-link">ESARE</a>
+
+              <!--<a href="salud_mental.html" class="nav-item nav-link">Salud Mental</a>-->
               <a href="dit.html" class="nav-item nav-link">DIT</a>
               <a href="nosotros.html" class="nav-item nav-link">Nosotros</a>
 
@@ -150,7 +147,20 @@
               </div>
               -->
 
-              <a href="contact.html" class="nav-item nav-link active">Contacto</a>
+              <a href="contact.html" class="nav-item nav-link active"
+                >Contacto</a
+              >
+              <a
+                href="#"
+                id="nav-registros"
+                class="nav-item nav-link d-none"
+                onclick="
+                  verRegistros();
+                  return false;
+                "
+              >
+                <i class="fas fa-history me-1"></i>Registros
+              </a>
             </div>
           </div>
 
@@ -177,6 +187,33 @@
     </div>
     <!-- Navbar & Hero End -->
 
+    <!-- User Panel -->
+    <div
+      id="user-panel"
+      style="display: none !important; justify-content: center"
+      class="py-2 bg-light"
+    >
+      <div
+        class="d-inline-flex align-items-center bg-white rounded-pill px-4 py-2 shadow-sm"
+      >
+        <i class="fas fa-user-circle text-primary me-2 fa-lg"></i>
+        <span class="me-3"
+          >Bienvenido, <strong id="logged-username"></strong
+        ></span>
+        <span class="text-muted small me-3"
+          ><i class="fas fa-clock text-primary me-1"></i>Ingreso:
+          <span id="login-time"></span
+        ></span>
+        <button
+          class="btn btn-sm btn-outline-danger rounded-pill"
+          onclick="cerrarSesion()"
+        >
+          <i class="fas fa-sign-out-alt me-1"></i>Salir
+        </button>
+      </div>
+    </div>
+    <!-- User Panel End -->
+
     <!-- Modal Search Start -->
     <div
       class="modal fade"
@@ -188,9 +225,7 @@
       <div class="modal-dialog modal-fullscreen">
         <div class="modal-content rounded-0">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Buscar
-            </h5>
+            <h5 class="modal-title" id="exampleModalLabel">Buscar</h5>
             <button
               type="button"
               class="btn-close"
@@ -265,7 +300,8 @@
             <div>
               <h4 class="text-primary">Envíanos un Mensaje</h4>
               <p class="mb-4">
-                Si tienes alguna duda, consulta o necesitas más información, no dudes en escribirnos. Estaremos encantados de ayudarte.
+                Si tienes alguna duda, consulta o necesitas más información, no
+                dudes en escribirnos. Estaremos encantados de ayudarte.
                 <!-- <a
                   class="text-primary fw-bold"
                   href="https://htmlcodex.com/contact-form"
@@ -728,6 +764,144 @@
     <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"
       ><i class="fa fa-arrow-up"></i
     ></a>
+
+    <!-- Modal Registro de Accesos -->
+    <div
+      class="modal fade"
+      id="accessLogModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+      >
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-history text-primary me-2"></i>Registro de
+              Ingresos
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body"><div id="access-log-content"></div></div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-outline-danger btn-sm"
+              onclick="limpiarRegistros()"
+            >
+              <i class="fas fa-trash me-1"></i>Limpiar historial
+            </button>
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const USUARIOS_DEFAULT = [
+        {
+          user: "admin",
+          pass: "risch2024",
+          nombre: "Administrador RISCH",
+          microred: "",
+          ipress: "",
+          rol: "admin",
+          activo: true,
+        },
+        {
+          user: "redsalud",
+          pass: "fed2024",
+          nombre: "Red de Salud Bagua",
+          microred: "Red Salud Bagua",
+          ipress: "",
+          rol: "usuario",
+          activo: true,
+        },
+        {
+          user: "franz",
+          pass: "risch123",
+          nombre: "Franz Jensen Loja Zelada",
+          microred: "Microred Bagua",
+          ipress: "C.S. Bagua",
+          rol: "usuario",
+          activo: true,
+        },
+      ];
+      function getUsuarios() {
+        const raw = localStorage.getItem("risch_usuarios");
+        if (!raw) {
+          localStorage.setItem(
+            "risch_usuarios",
+            JSON.stringify(USUARIOS_DEFAULT),
+          );
+          return USUARIOS_DEFAULT;
+        }
+        return JSON.parse(raw);
+      }
+      function mostrarPanelUsuario(sesion) {
+        const display = sesion.nombre
+          ? `${sesion.nombre} (${sesion.usuario})`
+          : sesion.usuario;
+        let extra = "";
+        if (sesion.ipress)
+          extra += ` &nbsp;|&nbsp; <i class="fas fa-hospital text-primary me-1"></i>${sesion.ipress}`;
+        if (sesion.microred)
+          extra += ` &nbsp;|&nbsp; <i class="fas fa-network-wired text-primary me-1"></i>${sesion.microred}`;
+        document.getElementById("logged-username").innerHTML = display + extra;
+        document.getElementById("login-time").textContent = sesion.hora;
+        const p = document.getElementById("user-panel");
+        p.style.setProperty("display", "flex", "important");
+        p.style.justifyContent = "center";
+      }
+      function cerrarSesion() {
+        sessionStorage.removeItem("risch_sesion");
+        document
+          .getElementById("user-panel")
+          .style.setProperty("display", "none", "important");
+        document.getElementById("nav-registros").classList.add("d-none");
+      }
+      function verRegistros() {
+        const logs = JSON.parse(localStorage.getItem("risch_accesos") || "[]");
+        const el = document.getElementById("access-log-content");
+        if (!logs.length) {
+          el.innerHTML =
+            '<p class="text-muted text-center py-3">No hay registros de acceso aún.</p>';
+        } else {
+          let html =
+            '<div class="table-responsive"><table class="table table-sm table-hover"><thead class="table-primary"><tr><th>#</th><th>Usuario</th><th>Microred</th><th>Reporte</th><th>Fecha y Hora</th></tr></thead><tbody>';
+          logs.forEach((l, i) => {
+            html += `<tr><td>${i + 1}</td><td><i class="fas fa-user me-1 text-primary"></i>${l.usuario}</td><td>${l.microred || "—"}</td><td>${l.reporte}</td><td><i class="fas fa-clock me-1 text-muted"></i>${l.hora}</td></tr>`;
+          });
+          html += "</tbody></table></div>";
+          el.innerHTML = html;
+        }
+        new bootstrap.Modal(document.getElementById("accessLogModal")).show();
+      }
+      function limpiarRegistros() {
+        if (confirm("¿Seguro que deseas eliminar todo el historial?")) {
+          localStorage.removeItem("risch_accesos");
+          document.getElementById("access-log-content").innerHTML =
+            '<p class="text-muted text-center py-3">Historial eliminado.</p>';
+        }
+      }
+      window.addEventListener("DOMContentLoaded", () => {
+        getUsuarios();
+        const sesion = JSON.parse(
+          sessionStorage.getItem("risch_sesion") || "null",
+        );
+        if (sesion) {
+          mostrarPanelUsuario(sesion);
+          if (sesion.rol === "admin")
+            document.getElementById("nav-registros").classList.remove("d-none");
+        }
+      });
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
